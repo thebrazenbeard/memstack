@@ -10,7 +10,7 @@ MemStack investigates whether brain–computer interfaces can record, index, and
 - **Research target:** Consent-controlled, provenance-aware neural memory indexing with measurable benefits beyond non-neural records.
 - **Not established:** Copying any person's complete personal experience to a file, replaying it faithfully, or writing an archived experience back into a brain.
 
-See the versioned [evidence register](docs/EVIDENCE_REGISTER_20261029.md), [architecture](docs/ARCHITECTURE_V0.md), [experiment plan](docs/EXPERIMENTS_V0.md), and [T’Kal-in-ket adversarial review](reviews/TKIK_BCI_MEMORY_20261029.md) as they are admitted.
+The first four research documents are reviewable in [draft PR #1](https://github.com/thebrazenbeard/memstack/pull/1): an evidence register, architecture, experiment plan, and T’Kal-in-ket-style adversarial review. They are **not yet merged into main**.
 
 ## Non-negotiable distinctions
 
