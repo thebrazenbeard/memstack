@@ -1,6 +1,6 @@
 # MemStack Muse 2 feasibility pilot v0
 
-**Status:** SOURCE-BACKED DESIGN / NOT INSTALLED / NOT RUN. Patrick reports owning one Muse 2. I have not verified the device's pairing, charge, firmware, data-stream access, actual sensor quality, or host compatibility. No personal neural recording has been made for MemStack.
+**Status (2026-10-29):** SOURCE-BACKED DESIGN / LOCAL FEASIBILITY PROBE COMPLETED / M0 NOT QUALIFIED. Patrick reports owning one Muse 2. BrainFlow was installed on Lappy, direct BLE connectivity was observed, and short consented four-channel readouts were processed in memory. Firmware provenance, calibrations, electrode quality, private archived raw source and scientific repeatability remain unverified. These provisional readings are not an M0 PASS.
 
 ## Exact hardware boundary
 
@@ -10,7 +10,7 @@ The Muse consumer app does not offer raw EEG export. Manufacturer [SDK access](h
 
 ## Capture routes to qualify, in priority order
 
-1. **Lappy / Windows BLE + BrainFlow:** verify current Windows build and working Bluetooth Low Energy hardware before installing anything. Use the official Muse 2 board ID, query actual EEG-channel indices and sampling rate from the installed library, and explicitly select only four named EEG channels. Do not hard-code dataframe columns from an unrelated board or Muse S version.
+1. **Lappy / Windows BLE + BrainFlow (locally exercised):** use the official Muse 2 board ID, validate installed-library descriptor EEG-channel indices and sampling rate, and explicitly select only four named EEG channels. Do not hard-code dataframe columns from an unrelated board or Muse S version. The observed local BLE connection is a feasibility result, not qualified signal fidelity.
 2. **Android / existing Muse-compatible recording app:** investigate a documented raw-EEG CSV export workflow if such an app is already installed/licensed. Export locally and preserve exact device/app version, time base and channel identities. Do not silently grant an app extra personal-data permissions.
 3. **Linux host with BLE access:** BrainFlow notes Linux may need `libdbus` and compilation for its BLE backend. Do not install/compile or alter another node without a verified host, current permission and bounded plan.
 
@@ -50,6 +50,6 @@ This is a personal exploratory pilot. A regulated or prospective human-subject s
 - [Independent consumer EEG BCI assessment](https://pmc.ncbi.nlm.nih.gov/articles/PMC11502727/)
 - [Muse 2 versus research headsets, artifacts and contact](https://pmc.ncbi.nlm.nih.gov/articles/PMC12972051/)
 
-**Acceptance before a live probe:** confirm the intended host/BLE route and recording scope. No software install, Bluetooth pairing, private EEG capture or transfer is authorized merely by this design document.
+**Acceptance before further live experiments:** confirm individual consent and bounded recording scope each time; the earlier user's consented pilot does not imply perpetual permission for acquisition or private EEG transfer. The local [monitor](MONITOR_V01.md) is a signal-preview and protocol-timing prototype: because it has no inspectable private raw-EEG archive, it cannot alone satisfy the reproducibility portion of M0 PASS.
 
 The software-first [signal ingest foundation](SIGNAL_INGEST_V0.md) can be tested without acquiring any device data; it is the prerequisite for attaching a live BrainFlow adapter.

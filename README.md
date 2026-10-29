@@ -1,6 +1,6 @@
 # MemStack
 
-**Research status: source-backed concept and experimental design — not an installed BCI, clinical device, or demonstrated human-memory backup.**
+**Research status: source-backed concept, research prototype, and local Muse 2 acquisition pilot — not a clinical device or demonstrated human-memory backup.**
 
 MemStack investigates whether brain–computer interfaces can record, index, and eventually reconstruct verifiable aspects of human autobiographical memory in digital storage.
 
@@ -26,7 +26,7 @@ The final command downloads only small version-pinned public TSV metadata for 27
 
 ### Personal hardware feasibility: Muse 2
 
-Patrick reports owning a Muse 2. The source-backed [Muse 2 pilot plan](docs/MUSE2_PILOT_V0.md) separates a four-channel, 256-Hz local signal-quality/recognition research path from the 64-channel Essex public benchmark. **No headset has been connected, software installed, or personal EEG recorded for MemStack.** The device is not a whole-memory reader.
+Patrick reports owning a Muse 2. The source-backed [Muse 2 pilot plan](docs/MUSE2_PILOT_V0.md) separates a four-channel, 256-Hz local signal-quality/recognition research path from the 64-channel Essex public benchmark. On October 29, 2026, BrainFlow was installed on the user's Windows host (Lappy); a directly connected Muse 2 was observed returning live four-channel readings in short, consented, in-memory sessions. **This does not independently establish electrode quality, calibrated brain activity, neural source authenticity, or memory decoding.** The device is not a whole-memory reader.
 
 ### Brainwave reading foundation (hardware-independent)
 
@@ -39,7 +39,21 @@ python -m unittest discover -s tests -q
 
 `SYNTHETIC` never means a live brainwave; the result explicitly states hardware acquisition and memory decoding are not verified. Device adapters and private encrypted retention are separate future gates.
 
-The initial optional [Muse 2 → Lappy BrainFlow adapter](docs/MUSE2_ADAPTER_V0.md) is now implemented with hardware-free tests. `python -m memstack.muse2` safely inspects the offline plan; an actual short in-memory BLE recording requires BrainFlow, a compatible nearby headset, and explicit `--capture --consent`. **No live Muse 2 connection has been demonstrated, and no raw EEG has been collected.**
+The initial optional [Muse 2 → Lappy BrainFlow adapter](docs/MUSE2_ADAPTER_V0.md) is now implemented with hardware-free tests. `python -m memstack.muse2` safely inspects the offline plan; an actual short in-memory BLE recording requires BrainFlow, a compatible nearby headset, and explicit `--capture --consent`. The local trial above does not authorize public disclosure of raw personal EEG, and none belongs in this repository.
+
+### Windows monitor prototype
+
+The optional [MemStack Monitor v0.1](docs/MONITOR_V01.md) adds a local, consent-gated four-channel display, bounded live acquisition, basic artifact warnings, and a self-contained eyes-open/eyes-closed protocol with audible instructions. Unlike a memory decoder, this is primarily a **signal-quality and experimental-timing tool**. It neither uploads nor saves raw EEG, and auditory prompts have scheduled markers rather than independently measured sound-onset times.
+
+On Windows in the MemStack directory, after installing the optional `brainflow` dependency:
+
+```powershell
+.\.venv\Scripts\python.exe -m memstack.monitor
+```
+
+Or double-click `scripts\launch_monitor.cmd` from File Explorer if the repository's `.venv` is already provisioned.
+
+Launching the window alone does not connect to the headset or read neural data. Start requires a visible consent action. See the monitor guide for usage, privacy limits, and known omissions.
 
 ## Non-negotiable distinctions
 
