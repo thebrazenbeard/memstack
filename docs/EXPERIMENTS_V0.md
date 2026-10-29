@@ -63,6 +63,8 @@ Use duration-preserving noise, matched-event details, event-wise and participant
 
 ## Phase B: proposed prospective, noninvasive study
 
+A separate, smaller [Muse 2 owner-device pilot](MUSE2_PILOT_V0.md) first qualifies four-channel EEG connection, source/clock integrity and physiological artifact baselines. It is **not** the 64-channel Essex benchmark, is not equivalent to Phase B, and makes no autobiographical memory extraction claim. Patrick reports possessing the device, but no real host/headset probe has occurred.
+
 **MEMSTACK-EPISODIC-001 — NOT APPROVED OR EXECUTED.** Requires qualified ethics/IRB review, participant protections, and scientific collaborators.
 
 1. Generate one-time, harmless events containing unpredictable combinations of people/objects/locations/order. Include same-category events with discriminating details.

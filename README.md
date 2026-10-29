@@ -24,6 +24,10 @@ python -m scripts.audit_essex_metadata --output reports/essex_metadata_audit.jso
 
 The final command downloads only small version-pinned public TSV metadata for 27 subjects, verifies expected trial counts, and writes a source-hash report. The report is a **check**, not a trained EEG benchmark. The [Wave 3–5 hostile review](reviews/WAVES_3_TO_5_20261029.md) and [governance design](docs/GOVERNANCE_CONTRACT_V0.md) identify what remains before human data, BCI processing or claims of partial-content extraction could be justified.
 
+### Personal hardware feasibility: Muse 2
+
+Patrick reports owning a Muse 2. The source-backed [Muse 2 pilot plan](docs/MUSE2_PILOT_V0.md) separates a four-channel, 256-Hz local signal-quality/recognition research path from the 64-channel Essex public benchmark. **No headset has been connected, software installed, or personal EEG recorded for MemStack.** The device is not a whole-memory reader.
+
 ## Non-negotiable distinctions
 
 A neural voltage recording, a participant's report, a sensor recording of an event, a statistical decoder output, and AI-generated imagery are **different evidence classes**. No one class silently becomes a verified memory of the event. Neural recordings require specific consent, protected storage, and a right to stop participation.
