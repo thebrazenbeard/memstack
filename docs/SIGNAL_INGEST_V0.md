@@ -45,3 +45,5 @@ The `sample_index` is *adapter-provided*. The validator reports missing **index 
 6. Only after that, preregister within-person memory-*related* prediction experiments against non-neural and shuffled controls, using session-disjoint reserved trials.
 
 See the [Muse 2 pilot](MUSE2_PILOT_V0.md), [Essex experiment protocol](EXPERIMENTS_V0.md), and [governance plan](GOVERNANCE_CONTRACT_V0.md). The software state reported here is a strict contract prototype; real acquisition, usable signal, raw-to-feature provenance, model generalization and clinical effectiveness remain **UNKNOWN**.
+
+The optional [Muse 2 BrainFlow adapter v0](MUSE2_ADAPTER_V0.md) now maps the documented four EEG rows and source Unix timestamp to this schema with an explicit in-memory capture gate. Its unit tests use a fake backend; this is **not** proof that the adapter has communicated with physical hardware. Native packet loss and true EEG units still need independent on-device qualification.

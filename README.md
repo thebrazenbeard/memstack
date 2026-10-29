@@ -39,6 +39,8 @@ python -m unittest discover -s tests -q
 
 `SYNTHETIC` never means a live brainwave; the result explicitly states hardware acquisition and memory decoding are not verified. Device adapters and private encrypted retention are separate future gates.
 
+The initial optional [Muse 2 → Lappy BrainFlow adapter](docs/MUSE2_ADAPTER_V0.md) is now implemented with hardware-free tests. `python -m memstack.muse2` safely inspects the offline plan; an actual short in-memory BLE recording requires BrainFlow, a compatible nearby headset, and explicit `--capture --consent`. **No live Muse 2 connection has been demonstrated, and no raw EEG has been collected.**
+
 ## Non-negotiable distinctions
 
 A neural voltage recording, a participant's report, a sensor recording of an event, a statistical decoder output, and AI-generated imagery are **different evidence classes**. No one class silently becomes a verified memory of the event. Neural recordings require specific consent, protected storage, and a right to stop participation.
