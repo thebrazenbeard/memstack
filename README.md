@@ -28,6 +28,17 @@ The final command downloads only small version-pinned public TSV metadata for 27
 
 Patrick reports owning a Muse 2. The source-backed [Muse 2 pilot plan](docs/MUSE2_PILOT_V0.md) separates a four-channel, 256-Hz local signal-quality/recognition research path from the 64-channel Essex public benchmark. **No headset has been connected, software installed, or personal EEG recorded for MemStack.** The device is not a whole-memory reader.
 
+### Brainwave reading foundation (hardware-independent)
+
+The [raw-signal ingest contract](docs/SIGNAL_INGEST_V0.md) now has an executable deterministic four-channel waveform source, strict timing/channel validation, gap accounting and raw-sample replay. Test it without Bluetooth or human data:
+
+```sh
+python -m memstack.waveform --seconds 2
+python -m unittest discover -s tests -q
+```
+
+`SYNTHETIC` never means a live brainwave; the result explicitly states hardware acquisition and memory decoding are not verified. Device adapters and private encrypted retention are separate future gates.
+
 ## Non-negotiable distinctions
 
 A neural voltage recording, a participant's report, a sensor recording of an event, a statistical decoder output, and AI-generated imagery are **different evidence classes**. No one class silently becomes a verified memory of the event. Neural recordings require specific consent, protected storage, and a right to stop participation.

@@ -51,3 +51,5 @@ This is a personal exploratory pilot. A regulated or prospective human-subject s
 - [Muse 2 versus research headsets, artifacts and contact](https://pmc.ncbi.nlm.nih.gov/articles/PMC12972051/)
 
 **Acceptance before a live probe:** confirm the intended host/BLE route and recording scope. No software install, Bluetooth pairing, private EEG capture or transfer is authorized merely by this design document.
+
+The software-first [signal ingest foundation](SIGNAL_INGEST_V0.md) can be tested without acquiring any device data; it is the prerequisite for attaching a live BrainFlow adapter.
