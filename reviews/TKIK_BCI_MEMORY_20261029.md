@@ -21,6 +21,8 @@ Definitions:
 
 The above proposition is **HYPOTHESIS / TEAM OPERATIONALIZATION**, not `USER_DIRECT`.
 
+**Falsifiability boundary:** The broad future-technology question cannot be experimentally disproven by one failed decoder. It remains `UNKNOWN`. A future executable `Case` must instead freeze a candidate-specific claim and explicit falsifier: named sensor, cohort, voluntary task, permitted context, held-out episodes, delay, outcome metric and preregistered threshold. Failure then rejects *that candidate's* performance claim only.
+
 ## Evidence classes
 
 - `EXTERNAL_EVIDENCE`: primary human papers and public data records listed in [evidence register](../docs/EVIDENCE_REGISTER_20261029.md).
@@ -55,7 +57,7 @@ Under an explicit model where output is computed from neural data N and declared
 
 > **Challenge:** If generated reconstructions are repeatedly shown as the person's real past, false recollections may be reinforced. A subject's memory report and recorded history can legitimately diverge. Raw neurodata, inferred states, personal models and third-party media are sensitive; storing more for future AI creates future attack surface.
 
-**Answer:** Preserve separate evidence and correction histories. Display generated content as unverified. Obtain the person's independent recollection *before* revealing predictions during studies. Set voluntary capture and retention controls, encrypted local-first storage, separate training/sharing permissions, threat-model personalized weights and backups, and independent security review before identifiable uploads. See [UNESCO 2025 Recommendation](https://www.unesco.org/en/node/86248) and [Sandbrink & Young 2026](https://www.nature.com/articles/s43856-026-01797-y).
+**Answer:** Preserve separate evidence and correction histories. Display generated content as unverified, but do not assume labeling prevents suggestion-induced recollection. Obtain the person's independent recollection *before* revealing predictions during studies; log prior exposures. Require opt-in speculative generation, third-party privacy decisions and accessible communication/consent. Set voluntary capture and retention controls, encrypted local-first storage, separate training/sharing permissions, threat-model personalized weights and backups, and independent security review before identifiable uploads. See [Pataranutaporn et al. 2025](https://www.media.mit.edu/publications/synthetic-human-memories/), [Shao et al. 2026](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3003886), [UNESCO 2025 Recommendation](https://www.unesco.org/en/node/86248) and [Sandbrink & Young 2026](https://www.nature.com/articles/s43856-026-01797-y).
 
 **Disposition proposed:** REFINE. Archival utility does not prove continuity/identity transfer or authorize invasive interventions.
 
@@ -80,7 +82,7 @@ Under an explicit model where output is computed from neural data N and declared
 
 > A consent-controlled, person-calibrated BCI may preserve measurable neural correlates of experiences and recollection, decode limited associated content, and link these with a provenance-aware digital archive. Greater fidelity, generality and longevity of neural memory-content recovery are falsifiable scientific targets.
 
-This is **not** `SUSTAIN` under the repository's source implementation. No executed `Case`, three authenticated independent reviewer receipts, directed peer-to-peer challenge/response coverage or full adjudication log exists. The source requires those before a formal strong verdict. The written lenses here are a transparent model-synthesized hearing only.
+This is **not** `SUSTAIN` under the repository's source implementation. No executed `Case`, three distinct recorded reviewer identities with the required directed answered/conceded cross-examination cycle, or full adjudication log exists. Those are source-level gates for `SUSTAIN`; **authenticated independent-provider receipts are an additional evidence-integrity requirement, not something the current in-memory Python state machine itself verifies**. The written lenses here are a transparent model-synthesized hearing only.
 
 ## Acceptance and next falsifiers
 

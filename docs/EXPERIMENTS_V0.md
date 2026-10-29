@@ -1,6 +1,6 @@
 # MemStack experiment plan v0 — falsifiable neural memory indexing
 
-**Status: PROPOSAL. No dataset has been downloaded, no decoder trained, and no human participant or BCI experiment conducted by this project.**
+**Status: PROPOSAL plus public metadata parser/tests. Small public event/channel TSVs were retrieved; no EDF neural binary, decoder training, human participant or BCI experiment has been conducted by this project.**
 
 ## The question that matters
 
@@ -19,9 +19,16 @@ A model that matches the participant's *report* may still misdescribe the actual
 
 ### A1 — Recognition, practical EEG starter
 
-- Source: [Essex EEG Movie Memory ds006142](https://github.com/OpenNeuroDatasets/ds006142), [2025 data paper](https://www.nature.com/articles/s41597-025-06203-1): 27 participants, 64-channel EEG, ~24 GB.
+- Source: [Essex EEG Movie Memory ds006142](https://github.com/OpenNeuroDatasets/ds006142/tree/6af022b2d66e98573bf4fc8ffc7e0d2a02c66f65), [2025 data paper](https://www.nature.com/articles/s41597-025-06203-1): 27 participants, 64-channel EEG, ~24 GB; dataset revision v1.0.2 pinned at `6af022b2d66e98573bf4fc8ffc7e0d2a02c66f65`.
 - Task: predict reported recognition/memory strength during **viewing** of short movie clips, not spontaneous memory extraction.
 - Guardrails: training/test split grouped by film identity; use first presentations and pre-response EEG only; clip familiarity and participant priors as non-neural baseline; compare across acquisition cohorts; shuffled and wrong-person signals.
+- **Confirmed leakage hazard:** [sub-001 events](https://github.com/OpenNeuroDatasets/ds006142/blob/main/sub-001/eeg/sub-001_task-MovieMemory_events.tsv) encode later outcome in first-onset `trial_type` (`startOfRememberedClipFirstWatch`, etc.) and trigger `value`; `stim_file` reveals the film. The trigger channel and these fields, sample/onset timing, second-watch periods and later clicks are forbidden model inputs. Use them only in quarantined target/alignment tables. A grouped split needs a separately verified film-group mapping, not a guessed filename rule.
+- Cohort selection differed between 2019 and 2024; report within- and cross-cohort results and distribution shifts separately. This dataset has no dedicated EOG channel or eye tracker, so eye-artifact audits cannot be represented as an independently measured gaze baseline.
+- **Execution:** A strict metadata-only parser and 14 unit tests (including pinned audit tests) exist in `memstack/essex.py`, `scripts/audit_essex_metadata.py` and `tests/`. Real `sub-001` public TSV metadata yielded 152 first views (84 not recognized, 20 recognized, 48 remembered) and 64 EEG channels; **no neural binary or decoder was used**. Trial keys are qualified by declared source path and content hash. The declared source reference is not yet bound to an independently validated EDF acquisition.
+- **Whole dataset metadata cross-check (model review, not yet independent local job readback):** A Wave-5 reviewer retrieved the exact upstream v1.0.2 events TSVs for all 27 subjects: 4,153 first views (2,212 not recognized, 515 recognized, 1,426 remembered), 1,941 second views, 6,094 clip endings. Subjects 012 and 019 had no `recognised` trials. The finite metadata audit script checks these counts against raw byte hashes; no EDF download occurs.
+- **Frozen intended primary endpoint:** binary `recognised or remembered` versus `not_recognised`; paired, held-out **log-loss difference (context-only minus EEG+context)** on identical trials. Retain the three original categories for secondary analysis. Sub-001's majority-class three-way accuracy is 84/152 = 55.3%, not a 33.3% null.
+- **Generalization gates:** separate subject-disjoint and independently mapped canonical-film-disjoint held-outs; joint disjoint holdout only if coverage permits. Pre-registered class-prior, context-only, EEG-only, EEG+context, wrong-trial, wrong-subject, grouped shuffling and artifact controls; partition-first preprocessing and cohort-stratified reporting.
+- **Unresolved signal gate:** a feature named `eeg__Fp1__alpha` could still contain copied labels. Feature-name linting does not prove lineage; require raw EDF/BIDS channel reconciliation and an EEG-only allowlist, deliberate label-injection tests, filter-support/post-response impulse checks, and no unrestricted or automatically inferred trigger channels. No such signal-level verification has occurred.
 - Claim if successful: EEG contributes to recognition prediction, **not** that a movie was copied from memory.
 
 ### A2 — Recalled content, fMRI benchmark
@@ -61,7 +68,7 @@ Use duration-preserving noise, matched-event details, event-wise and participant
 1. Generate one-time, harmless events containing unpredictable combinations of people/objects/locations/order. Include same-category events with discriminating details.
 2. Obtain independently recorded event truth. Reserve unpredictable details and prevent answer access by the model's training/prompt pipelines.
 3. At recall visits (early, after sleep, and later delayed visits), record a **silent, voluntary recall** window before speech or response movement.
-4. Collect the participant's independent recollection *before* any generated reconstruction is displayed.
+4. Collect the participant's independent recollection *before* any generated reconstruction is displayed; record the elicitation method, assisted communication, prior AI-suggestion exposure and any participant-initiated generated aids.
 5. Compare decoder predictions against sealed event truth and separately against reported recollection.
 6. Repeat across different sessions and delays to test changing representations and electrode/measurement drift.
 
@@ -69,13 +76,15 @@ Avoid implying that a participant's failure to recall an event means the event d
 
 ### Primary endpoint
 
-For predefined, withheld event-specific targets, pre-register paired held-out predictive log-loss improvement:
+Pre-register **two distinct outcome families**: (a) prediction of details in the participant's subsequent report `R` from the preceding silent neural window, and (b) independent verification of those details against event truth `E`. Analyze correctly recalled, misrecalled and unreported details separately. Neither `R` nor `E` is an exhaustive readout of the internal memory `M`.
+
+For predefined withheld targets in each outcome family, pre-register paired held-out predictive log-loss improvement:
 
 ```text
 delta = log_loss(context_only) - log_loss(neural_plus_context)
 ```
 
-Positive `delta` suggests incremental predictive benefit from neural data. Report detail-level precision/recall, calibration, false additions, abstention rates, and per-person differences. This is **not** an unbiased estimate of all information contained in a memory.
+Positive `delta` suggests incremental predictive benefit from neural data. Report detail-level precision/recall, calibration, false additions, abstention rates, and per-person differences. This is **not** an unbiased estimate of all information contained in a memory. A single unsuccessful sensor/decoder trial cannot falsify the possibility of all future BCIs.
 
 Evaluate at the **participant/event** level with clustered uncertainty, not as independent thousands of time windows. Set meaningful effect size, exclusion rules, model selection, correction for multiple hypotheses and sample size using pilot data/power simulation **before** final evaluation. Do not invent a universal number of subjects or a post hoc significance gate.
 

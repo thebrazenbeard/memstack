@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.edf
+*.fif
+*.bdf
+*.set
+*.vhdr
+*.eeg
+*.fdt

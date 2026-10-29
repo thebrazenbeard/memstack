@@ -27,7 +27,7 @@ A generated aid must never silently replace a participant report or an independe
 | Class | Origin | What it establishes |
 | --- | --- | --- |
 | `EXTERNAL_RECORD` | Event photo/video/audio/time, independent witnesses | Observed aspects of events, limited by sensor and provenance |
-| `PARTICIPANT_REPORT` | Participant's unprompted account | What a person reports recalling at a recorded time |
+| `PARTICIPANT_REPORT` | Participant's account with elicitation prompt, modality, time, and prior suggestion exposure recorded | What a person reports recalling under those conditions, not necessarily what happened |
 | `NEURAL_MEASUREMENT` | Device sensor data and acquisition metadata | Measured electrical/hemodynamic signal, not a complete memory |
 | `NEURAL_INFERENCE` | Versioned statistical decoder | Estimated event, concept, or recall state, with uncertainty |
 | `GENERATED_HYPOTHESIS` | AI-created text/image/audio | A plausible representation, **not evidence** it occurred |
@@ -69,7 +69,7 @@ Schema is illustrative, not a deployed standard or a proof that neural inference
 2. **Ingest and time alignment:** import evidence classes independently; record source clock, timestamp uncertainty, calibration and artifact exclusions; hash source objects.
 3. **Experiment registry:** version public dataset manifests, task type, reserved labels, frozen splits and evaluation settings. No unexamined merge of closed-loop and observational trials.
 4. **Decoder:** start with transparent, individual-calibrated EEG features and modest baselines; separate predictions of `encoding_success`, `retrieval_state`, `known_event_identity`, and `known_concept`. Unknown classes and abstention are mandatory.
-5. **Archive/query:** preserve measured/reported/decoded/generated states and corrections; retrieval may surface relevant external media but must identify it as *external evidence*.
+5. **Archive/query:** preserve measured/reported/decoded/generated states and corrections; retrieval may surface relevant external media but must identify it as *external evidence*. Generated suggestions require affirmative user initiation and visible speculative labeling.
 6. **Governance/audit:** per-artifact permissions for sharing/training, retention, deletion and backups; access logs and security evaluations.
 
 ## Modeling principle
@@ -85,9 +85,12 @@ Protect raw signals, derivatives/embeddings, model weights/updates, participant 
 - Local-first encrypted storage and key separation; access scopes for each evidence class.
 - Explicit separate permissions for recording, research training, output sharing and model export.
 - Source integrity hashes, immutable correction lineage, inspectable model and consent versions.
-- Participant-visible generated-content labels and no generated output preceding independent recall collection during studies.
+- Participant-visible generated-content labels, affirmative opt-in to speculative suggestions, and no generated output preceding independent recall collection during studies. Log prior generated exposures when assessing later reports; labels alone do not prevent memory contamination.
+- Third-party recording/disclosure and training permissions must be evaluated separately under the applicable setting; redact or exclude identifiable bystander data where authorization or necessity is absent. A participant's consent does not grant blanket rights to other people's information.
+- Accessible capture, report, consent and withdrawal paths (including assistive/nonverbal communication) are design requirements; caregiver involvement must not silently grant unrestricted access.
 - Per-artifact retention/deletion manifest covering live stores, backups, derived datasets and models; do not promise total machine unlearning without proof.
 - Security testing prior to importing identifiable participant data.
+- An actual operation-specific authorization decision and an append-only record of generated-suggestion exposure are required before identifiable neural recording workflows. See [proposed governance contract](GOVERNANCE_CONTRACT_V0.md); the controls are **not yet implemented**.
 
 Relevant: [UNESCO 2025 neurotechnology ethics recommendation](https://www.unesco.org/en/node/86248), [OECD Responsible Innovation in Neurotechnology](https://legalinstruments.oecd.org/en/instruments/oecd-legal-0457), and [Sandbrink & Young 2026, Communications Medicine](https://www.nature.com/articles/s43856-026-01797-y). These do not by themselves define universal U.S. legal obligations.
 
@@ -98,6 +101,8 @@ Relevant: [UNESCO 2025 neurotechnology ethics recommendation](https://www.unesco
 - Generated plausibility without verifiable source ⇒ **hypothesis**, not faithful memory.
 - Better recall task scores after stimulation ⇒ **memory enhancement**, not restored archived memory.
 - Missing consent, exposed private data or conflated provenance ⇒ stop relevant data processing and correct the failure.
+- No provenance that a feature came from approved raw EEG ⇒ fail neural-model qualification, regardless of apparent accuracy.
+- No use of generated reconstructions as proof in forensic testimony, recovery of allegedly repressed trauma, or clinical memory restoration without wholly separate validation and authorization.
 
 ## Relation to BT2 conceptual sources
 
