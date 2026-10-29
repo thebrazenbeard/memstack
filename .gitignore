@@ -9,3 +9,5 @@ __pycache__/
 *.vhdr
 *.eeg
 *.fdt
+config.bat
+node_modules

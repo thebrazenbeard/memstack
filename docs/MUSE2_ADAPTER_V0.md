@@ -1,6 +1,6 @@
 # Muse 2 ↔ Lappy BrainFlow adapter v0
 
-**Code is implemented and tested with a fake board. No live Muse 2, Lappy Bluetooth controller, BrainFlow installation, private EEG, or hardware signal has yet been verified.**
+**Code is implemented and unit-tested with a fake board. On 2026-10-29, a real BrainFlow installation and direct Muse 2 BLE acquisition were observed on Lappy in short, consented, in-memory sessions. These observations do not independently verify calibration, electrode contact quality, signal origins, or memory decoding.**
 
 This adapter reads *EEG only* from a **Muse 2 directly connected by Bluetooth Low Energy to Lappy**. A phone or Tailscale gateway is not needed for that local link. Tailscale can be considered later for an authenticated computer-to-computer connection, but a Tailscale-connected phone does not automatically expose its Bluetooth peripherals.
 
@@ -20,7 +20,7 @@ python -m memstack.muse2 --capture --consent --seconds 5
 python -m memstack.muse2 --capture --consent --seconds 5 --serial-number MUSE_DEVICE_NAME
 ```
 
-`brainflow` is an **optional dependency**. The installation command is documented for future execution, not executed by the MemStack project. Check the installed BrainFlow version, Windows build, BLE device presence and explicit Bluetooth pairing/permissions on Lappy when hardware becomes available. BrainFlow documents Windows 10 build 19041 or later for its Muse 2 implementation. The adapter does not change Windows settings or install drivers.
+`brainflow` is an **optional dependency**. Version 5.23.0 was installed into an isolated Python environment on Lappy for the local pilot, but this repository does not bundle it. Check the active interpreter, installed BrainFlow version, Windows build and Bluetooth availability before each session. BrainFlow documents Windows 10 build 19041 or later for its Muse 2 implementation. The adapter does not change Windows settings or install drivers. A directly connected Muse does not require a phone-mediated Tailscale bridge.
 
 The command records for at most **30 seconds** and prints only a nonclinical signal/timing summary. By design, it neither uploads, saves nor logs personal raw EEG to disk. Live samples exist in the Python process only and are not an encrypted-retention solution. It also does not stream EEG over the network.
 
@@ -50,9 +50,9 @@ python -m unittest discover -s tests -v
 python -m memstack.muse2
 ```
 
-Unit tests use a **fake BrainFlow board boundary**, not a real Bluetooth connection. They independently challenge wrong row layouts, wrong sample rate, malformed EEG/Unix timestamps, gap diagnosis, startup and drain failure cleanup, interrupted capture, and the consent precondition.
+Unit tests use a **fake BrainFlow board boundary**, not a real Bluetooth connection. They independently challenge wrong row layouts, wrong sample rate, malformed EEG/Unix timestamps, gap diagnosis, startup and drain failure cleanup, interrupted capture, and the consent precondition. Separate operator-led runtime observations confirmed a BLE connection and samples on four BrainFlow EEG rows, but do not establish clinical or scientific signal validity.
 
-Before treating a session as real qualified EEG: independently verify Lappy host identity and BLE capability, headset firmware/model, BrainFlow build and descriptor, in-person participant consent, actual channel timing/unit calibration, electrode/contact quality, data loss accounting and private retention. Recording to a private secure medium is **not part of this version**.
+Before treating a session as real *qualified* EEG: independently verify headset firmware/model, BrainFlow descriptor and data provenance, in-person participant consent, channel timing/unit calibration, electrode/contact quality, source packet loss accounting, and private retention. Recording to a private secure medium is **not part of this version**.
 
 Primary references:
 
